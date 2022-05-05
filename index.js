@@ -1,16 +1,15 @@
 const express = require('express')
 const app = express()
-const knexConfig = require('./db/knexfile');
 //initialize knex
+const knexConfig = require('./db/knexfile');
 const knex = require('knex')(knexConfig)
 
 app.use(express.json())
 app.get('/',(req,res)=>{
-  knex.select().table('students')
+  knex.select().table('books')
   .then((data)=>{
-    console.log(data)
+    res.json(data)
   })
-  res.json("OK")
 })
 
 //api
