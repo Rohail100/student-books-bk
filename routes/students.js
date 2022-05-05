@@ -32,8 +32,18 @@ router.post('/',(req,res)=>{
     })
 })
 
+//update a student
+router.put('/:id',(req,res)=>{
+    let updatedValues = req.body;
+    knex.from('students').update(updatedValues).where('id', req.params.id)
+    .then((data)=>{
+        res.json(data)
+    })    
+})
+
 //delete a student
 router.delete('/:id',(req,res)=>{
+    //updating books before deleting student
     const borrowed_by=null
     knex.from('books').update({borrowed_by}).where('borrowed_by', req.params.id)
     .then(()=>{

@@ -32,6 +32,15 @@ router.post('/',(req,res)=>{
     })
 })
 
+//update a book
+router.put('/:id',(req,res)=>{
+    let updatedValues = req.body;
+    knex.from('books').update(updatedValues).where('id', req.params.id)
+    .then((data)=>{
+        res.json(data)
+    })    
+})
+
 //delete a book
 router.delete('/:id',(req,res)=>{
     knex.from('books').where('id', req.params.id).del()
