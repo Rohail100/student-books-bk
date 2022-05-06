@@ -5,7 +5,10 @@ const knex = require('knex')(knexConfig)
 
 //get all books
 router.get('/',(req,res)=>{
-    knex.select().table('books')
+    knex.select('books.id', 'name', 'author', knex.raw('to_char("borrow_date", \'DD/MM/YYYY\') as "borrow_date"'), 
+    knex.raw('to_char("return_date", \'DD/MM/YYYY\') as "return_date"'),
+    knex.raw('concat("fname", \' \',"lname") as "fullname"')).
+    table('books').leftJoin('students','students.id','books.borrowed_by')
     .then((data)=>{
       res.json(data)
     })
