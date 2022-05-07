@@ -1,4 +1,5 @@
-<h1>Back end of student books application</h1>
+<h1>Backend of student books application</h1>
+<p>Link to Frontend Repo: https://github.com/Rohail100/student-books-fe</p>
 <h2>Follow the instructions to init</h2>
 <p>Clone the Repo</p>
 <p>Create the postgres database "stbooks" in psql shell</p>
