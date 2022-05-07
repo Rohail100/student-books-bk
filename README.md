@@ -15,9 +15,11 @@ CREATE DATABASE stbooks;
 npm install
 ```
 <p>Create Database Relations</p>
+
 ```sh
 npm run migrate
 ```
+
 <p>Seed Database</p>
 
 ```sh
