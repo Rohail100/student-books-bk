@@ -45,7 +45,9 @@ router.put('/:id',(req,res)=>{
 router.delete('/:id',(req,res)=>{
     //updating books before deleting student
     const borrowed_by=null
-    knex.from('books').update({borrowed_by}).where('borrowed_by', req.params.id)
+    const borrow_date=null
+    const return_date=null
+    knex.from('books').update({borrowed_by,borrow_date,return_date}).where('borrowed_by', req.params.id)
     .then(()=>{
         knex.from('students').where('id', req.params.id)
         .del()

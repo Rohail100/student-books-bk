@@ -5,10 +5,10 @@ const knex = require('knex')(knexConfig)
 
 //get all books
 router.get('/',(req,res)=>{
-    knex.select('books.id', 'name', 'author', knex.raw('to_char("borrow_date", \'DD/MM/YYYY\') as "borrow_date"'), 
-    knex.raw('to_char("return_date", \'DD/MM/YYYY\') as "return_date"'),
-    knex.raw('concat("fname", \' \',"lname") as "fullname"')).
-    table('books').leftJoin('students','students.id','books.borrowed_by')
+    knex.select('books.id', 'name','borrowed_by', 'author', knex.raw('to_char("borrow_date", \'MM-DD-YYYY\') as "borrow_date"'), 
+    knex.raw('to_char("return_date", \'MM-DD-YYYY\') as "return_date"'),
+    knex.raw('concat("fname", \' \',"lname") as "student_name"'))
+    .table('books').leftJoin('students','students.id','books.borrowed_by')
     .then((data)=>{
       res.json(data)
     })
@@ -16,7 +16,10 @@ router.get('/',(req,res)=>{
 
 //get one book
 router.get('/:id',(req,res)=>{
-    knex.select().table('books').where('id', req.params.id)
+    knex.select('*',knex.raw('to_char("borrow_date", \'YYYY-MM-DD\') as "borrow_date"'),
+    knex.raw('to_char("return_date", \'YYYY-MM-DD\') as "return_date"'))
+    .table('books')
+    .where('id', req.params.id)
     .then((data)=>{
       res.json(data[0])
     })

@@ -5,7 +5,7 @@ exports.up = function(knex) {
       table.string('name').notNullable();
       table.string('author');
       table.integer('borrowed_by').unsigned()
-      table.foreign('borrowed_by').references('students.id');
+      table.foreign('borrowed_by').references('students.id').onUpdate('CASCADE').onDelete('CASCADE');
       table.date("borrow_date");
       table.date("return_date")
     });
